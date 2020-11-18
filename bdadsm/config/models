@@ -1,0 +1,4 @@
+Produto
+    nome Text
+    preco Double
+    deriving Show
