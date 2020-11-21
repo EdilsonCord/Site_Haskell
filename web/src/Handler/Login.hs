@@ -20,7 +20,7 @@ getEntrarR = do
     (widget,_) <- generateFormPost formLogin
     msg <- getMessage
     defaultLayout $ do 
-        geraForm EntrarR "ENTRAR" "Login" msg widget
+        geraForm EntrarR "ENTRARR" "Login" msg widget
 
 postEntrarR :: Handler Html
 postEntrarR = do 

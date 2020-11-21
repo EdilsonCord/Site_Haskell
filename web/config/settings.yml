@@ -3,12 +3,12 @@
 
 static-dir:     "_env:STATIC_DIR:static"
 host:           "_env:HOST:*4" # any IPv4 host
-port:           "_env:PORT:8080" # NB: The port `yesod devel` uses is distinct from this value. Set the `yesod devel` port from the command line.
+port:           "_env:PORT:80" # NB: The port `yesod devel` uses is distinct from this value. Set the `yesod devel` port from the command line.
 ip-from-header: "_env:IP_FROM_HEADER:false"
 
 # Default behavior: determine the application root from the request headers.
 # Uncomment to set an explicit approot
-#approot:        "_env:APPROOT:http://localhost:3000"
+# approot:        "_env:APPROOT:http://haskellsite.herokuapp.com"
 
 # Optional values with the following production defaults.
 # In development, they default to the inverse.
@@ -24,11 +24,11 @@ ip-from-header: "_env:IP_FROM_HEADER:false"
 # See https://github.com/yesodweb/yesod/wiki/Configuration#parsing-numeric-values-as-strings
 
 database:
-  user:     "_env:PGUSER:wlkxamyxtklvet"
-  password: "_env:PGPASS:ca23f3a4cff9f668ea4df53bebb61ef0fa9ed552f2909f0c88aa3fad1eecb0a7"
-  host:     "_env:PGHOST:ec2-52-71-153-228.compute-1.amazonaws.com"
+  user:     "_env:PGUSER:ageczfarnbbavm"
+  password: "_env:PGPASS:6710240d2e42e13d97c60468b6a9969eaea0e7fababcccff5e04ed2ce15b598a"
+  host:     "_env:PGHOST:ec2-54-166-114-48.compute-1.amazonaws.com"
   port:     "_env:PGPORT:5432"
-  database: "_env:PGDATABASE:daqbredgb13g2k"
+  database: "_env:PGDATABASE:da834775rh456t"
   poolsize: "_env:PGPOOLSIZE:10"
 
 copyright: Insert copyright statement here
