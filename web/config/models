@@ -1,5 +1,7 @@
 Imovel
     nome Text
+    descricao Text
+    endereco Text
     preco Double
     deriving Show
 

@@ -7,7 +7,7 @@
 module Handler.Imovel where
 
 import Import
-import Tool
+import Tool ( formQt )
 --import Database.Persist.Postgresql
 
 -- (<$>) = fmap :: Functor f => (a -> b) -> f a -> f b
@@ -20,7 +20,10 @@ formImovel imov = renderDivs $ Imovel
                                       Nothing
                                       [("class","myClass")]
                        ) (fmap imovelNome imov)
+    <*> areq textField "Descricao: " (fmap imovelDescricao imov)
+    <*> areq textField "Endereco: " (fmap imovelEndereco imov)
     <*> areq doubleField "Preco: " (fmap imovelPreco imov)
+    
 
 auxImovelR :: Route App -> Maybe Imovel -> Handler Html
 auxImovelR rt imovel = do
@@ -28,7 +31,7 @@ auxImovelR rt imovel = do
     defaultLayout $ do
         [whamlet|
             <h1>
-                 CADASTRO DE PRODUTO
+                 CADASTRO DE IMOVEL
             
             <form action=@{rt} method=post>
                 ^{widget}
@@ -57,6 +60,12 @@ getDescR pid = do
             Nome: #{imovelNome imovel}
         
         <h2>
+            Descricao: #{imovelDescricao imovel}
+        
+        <h3>
+            Endereco: #{imovelEndereco imovel}
+        
+        <h4>
             Preco: #{imovelPreco imovel}
         
         <form action=@{ComprarR pid} method=post>
@@ -73,13 +82,17 @@ getListImovR = do
                 <thead>
                     <tr>
                         <th> 
-                            Nome
+                            Nome do imovel
                         
                         <th>
-                            Imovel
+                            Descricao
                         
                         <th>
+                            Endereco
                         
+                        <th>
+                            Preco: 
+
                         <th>
                 <tbody>
                     $forall Entity pid imov <- imoveis
@@ -89,7 +102,14 @@ getListImovR = do
                                     #{imovelNome imov}
                             
                             <td>
+                                #{imovelDescricao imov}
+                            
+                            <td>
+                                #{imovelEndereco imov}
+                            
+                            <td>
                                 #{imovelPreco imov}
+                            
                             
                             <th>
                                 <a href=@{UpdImovR pid}>
@@ -120,5 +140,4 @@ postDelImovR pid = do
     runDB $ delete pid 
     redirect ListImovR
 
-
-
+    
