@@ -9,7 +9,7 @@ module Handler.Home where
 import Import
 import Database.Persist.Postgresql
 
---         <img src=@{StaticR img_produto_jpg}>
+--         <img src=@{StaticR img_imovel_jpg}>
 getHomeR :: Handler Html
 getHomeR = defaultLayout $ do 
     addStylesheet (StaticR css_bootstrap_css)
@@ -19,11 +19,11 @@ getHomeR = defaultLayout $ do
             SISTEMA DE PRODUTO
         <ul>
             <li> 
-                <a href=@{ProdutoR}>
+                <a href=@{ImovelR}>
                     CADASTRO
 
             <li>
-                <a href=@{ListProdR}>
+                <a href=@{ListImovR}>
                     LISTAR
         
             $maybe email <- sess

@@ -22,21 +22,21 @@ getListCompraR = do
                  Just (Entity uid usuario) -> do 
                      let sql = "SELECT ??,??,?? FROM usuario \
                         \ INNER JOIN compra ON compra.usuarioid = usuario.id \
-                        \ INNER JOIN produto ON compra.produtoid = produto.id \
+                        \ INNER JOIN imovel ON compra.imovelid = imovel.id \
                         \ WHERE usuario.id = ?"
-                     produtos <- runDB $ rawSql sql [toPersistValue uid] :: Handler [(Entity Usuario,Entity Compra,Entity Produto)]
+                     imoveis <- runDB $ rawSql sql [toPersistValue uid] :: Handler [(Entity Usuario,Entity Compra,Entity Imovel)]
                      defaultLayout $ do 
                         [whamlet|
                             <h1>
                                 COMPRAS de #{usuarioNome usuario}
                             
                             <ul>
-                                $forall (Entity _ _, Entity _ compra, Entity _ produto) <- produtos
+                                $forall (Entity _ _, Entity _ compra, Entity _ imovel) <- imoveis
                                     <li>
-                                        #{produtoNome produto}: #{produtoPreco produto * (fromIntegral (compraQtunit compra))}
+                                        #{imovelNome imovel}: #{imovelPreco imovel * (fromIntegral (compraQtunit compra))}
         |]
 
-postComprarR :: ProdutoId -> Handler Html
+postComprarR :: ImovelId -> Handler Html
 postComprarR pid = do
     ((resp,_),_) <- runFormPost formQt
     case resp of 

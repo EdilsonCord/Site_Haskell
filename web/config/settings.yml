@@ -10,7 +10,7 @@ ip-from-header: "_env:IP_FROM_HEADER:false"
 # Uncomment to set an explicit approot
 # approot:        "_env:APPROOT:http://haskellsite.herokuapp.com"
 
-# Optional values with the following production defaults.
+# Optional values with the following imovuction defaults.
 # In development, they default to the inverse.
 #
 # detailed-logging: false

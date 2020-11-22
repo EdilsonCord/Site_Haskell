@@ -4,11 +4,11 @@
 /robots.txt RobotsR GET
 
 / HomeR GET 
-/produto                    ProdutoR   GET POST
-/produto/#ProdutoId/descr   DescR      GET
-/produtos                   ListProdR  GET
-/produto/#ProdutoId/modifica UpdProdR  GET POST
-/produto/#ProdutoId/del      DelProdR  POST
+/imovel                    ImovelR   GET POST
+/imovel/#ImovelId/descr   DescR      GET
+/imoveis                   ListImovR  GET
+/imovel/#ImovelId/modifica UpdImovR  GET POST
+/imovel/#ImovelId/del      DelImovR  POST
 
 /usuario                    UsuarioR   GET POST
 
@@ -18,5 +18,5 @@
 /admin                      AdminR     GET
 
 /comprar/lista                      ListCompraR GET
-/comprar/#ProdutoId/efetuar         ComprarR    POST
+/comprar/#ImovelId/efetuar         ComprarR    POST
 

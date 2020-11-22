@@ -1,0 +1,139 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 759eab06d1656bd3240abe69d0dcc48668680cc24300e2fb9dbac8828ac338a4
+
+name:           aulahaskell
+version:        0.0.0
+build-type:     Simple
+
+flag dev
+  description: Turn on development settings, like auto-reload templates.
+  manual: False
+  default: False
+
+flag library-only
+  description: Build for use with "yesod devel"
+  manual: False
+  default: False
+
+library
+  exposed-modules:
+      Application
+      Foundation
+      Handler.Common
+      Handler.Compra
+      Handler.Home
+      Handler.Login
+      Handler.Imovel
+      Handler.Usuario
+      Import
+      Import.NoFoundation
+      Model
+      Settings
+      Settings.StaticFiles
+      Tool
+  other-modules:
+      Paths_aulahaskell
+  hs-source-dirs:
+      src
+  build-depends:
+      aeson
+    , base
+    , bytestring
+    , case-insensitive
+    , classy-prelude
+    , classy-prelude-conduit
+    , classy-prelude-yesod
+    , conduit
+    , containers
+    , data-default
+    , directory
+    , fast-logger
+    , file-embed
+    , foreign-store
+    , hjsmin
+    , http-conduit
+    , monad-control
+    , monad-logger
+    , persistent
+    , persistent-postgresql
+    , persistent-template
+    , safe
+    , shakespeare
+    , template-haskell
+    , text
+    , time
+    , unordered-containers
+    , vector
+    , wai
+    , wai-extra
+    , wai-logger
+    , warp
+    , yaml
+    , yesod
+    , yesod-auth
+    , yesod-core
+    , yesod-form
+    , yesod-static
+  if (flag(dev)) || (flag(library-only))
+    ghc-options: -Wall -fwarn-tabs -O0
+    cpp-options: -DDEVELOPMENT
+  else
+    ghc-options: -Wall -fwarn-tabs -O2
+  default-language: Haskell2010
+
+executable aulahaskell
+  main-is: main.hs
+  other-modules:
+      DevelMain
+      Paths_aulahaskell
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , aulahaskell
+    , base
+    , bytestring
+    , case-insensitive
+    , classy-prelude
+    , classy-prelude-conduit
+    , classy-prelude-yesod
+    , conduit
+    , containers
+    , data-default
+    , directory
+    , fast-logger
+    , file-embed
+    , foreign-store
+    , hjsmin
+    , http-conduit
+    , monad-control
+    , monad-logger
+    , persistent
+    , persistent-postgresql
+    , persistent-template
+    , safe
+    , shakespeare
+    , template-haskell
+    , text
+    , time
+    , unordered-containers
+    , vector
+    , wai
+    , wai-extra
+    , wai-logger
+    , warp
+    , yaml
+    , yesod
+    , yesod-auth
+    , yesod-core
+    , yesod-form
+    , yesod-static
+  if flag(library-only)
+    buildable: False
+  default-language: Haskell2010

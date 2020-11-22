@@ -1,10 +1,10 @@
-Produto
+Imovel
     nome Text
     preco Double
     deriving Show
 
 Compra 
-    produtoid ProdutoId 
+    imovelid ImovelId 
     usuarioid UsuarioId 
     qtunit    Int
     
