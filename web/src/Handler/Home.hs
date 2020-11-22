@@ -20,7 +20,7 @@ getHomeR = defaultLayout $ do
         <ul>
             <li> 
                 <a href=@{ImovelR}>
-                    CADASTRO
+                    CADASTRO DE IMOVEL
 
             <li>
                 <a href=@{ListImovR}>
@@ -35,5 +35,10 @@ getHomeR = defaultLayout $ do
             $nothing
                 <li>
                     <a href=@{EntrarR}>
-                        ENTRE
+                        LOGIN
+
+                <li> 
+                    <a href=@{UsuarioR}>
+                        CADASTRO DE USUÁRIO
+                
     |]
