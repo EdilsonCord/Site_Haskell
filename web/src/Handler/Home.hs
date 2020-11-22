@@ -8,15 +8,18 @@ module Handler.Home where
 
 import Import
 import Database.Persist.Postgresql
+import Text.Lucius
 
 --         <img src=@{StaticR img_imovel_jpg}>
 getHomeR :: Handler Html
-getHomeR = defaultLayout $ do 
+getHomeR = defaultLayout $ do
+    toWidgetHead $(luciusFile  "templates/homepage.lucius") 
     addStylesheet (StaticR css_bootstrap_css)
     sess <- lookupSession "_EMAIL"
     [whamlet|
+        <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
         <h1>
-            SISTEMA DE PRODUTO
+            ALUGUEL DE IMÓVEIS
         <ul>
             <li> 
                 <a href=@{ImovelR}>
@@ -41,4 +44,5 @@ getHomeR = defaultLayout $ do
                     <a href=@{UsuarioR}>
                         CADASTRO DE USUÁRIO
                 
+        <img src="https://i.imgur.com/zOQImYb.png" title="walking" />
     |]
