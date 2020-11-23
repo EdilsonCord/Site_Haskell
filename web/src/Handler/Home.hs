@@ -18,8 +18,10 @@ getHomeR = defaultLayout $ do
     sess <- lookupSession "_EMAIL"
     [whamlet|
         <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
-        <h1>
-            ALUGUEL DE IMÓVEIS
+        
+        <a href=@{HomeR}>
+            <h1>
+                ALUGUEL DE IMÓVEIS
         <ul>
             <li> 
                 <a href=@{ImovelR}>
@@ -31,10 +33,14 @@ getHomeR = defaultLayout $ do
         
             $maybe email <- sess
                 <li>
+                    <a>
+                        Logado como: #{email}
+
+                <li>
                     <div>
                         #{email}
                         <form method=post action=@{SairR}>
-                            <input type="submit" value="Sair">
+                            <input type="submit" value="SAIR">
             $nothing
                 <li>
                     <a href=@{EntrarR}>

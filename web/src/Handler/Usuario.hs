@@ -23,8 +23,39 @@ getUsuarioR = do
     (widget,_) <- generateFormPost formUsu
     msg <- getMessage
     defaultLayout $ do 
-        toWidgetHead $(luciusFile  "templates/form.lucius")
-        geraForm UsuarioR "CADASTRO DE USUARIO" "Cadastrar" msg widget
+        toWidgetHead $(luciusFile  "templates/homepage.lucius") 
+        addStylesheet (StaticR css_bootstrap_css)
+        sess <- lookupSession "_EMAIL"
+        [whamlet|
+            <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+            <a href=@{HomeR}>
+                <h1>
+                    ALUGUEL DE IMÓVEIS
+            <ul>
+                <li> 
+                    <a href=@{ImovelR}>
+                        CADASTRO DE IMOVEL
+
+                <li>
+                    <a href=@{ListImovR}>
+                        LISTAR
+            
+                $maybe email <- sess
+                    <li>
+                        <div>
+                            #{email}
+                            <form method=post action=@{SairR}>
+                                <input type="submit" value="Sair">
+                $nothing
+                    <li>
+                        <a href=@{EntrarR}>
+                            LOGIN
+
+                    <li> 
+                        <a href=@{UsuarioR}>
+                            CADASTRO DE USUÁRIO
+        |]
+        geraForm UsuarioR "CADASTRO DE USUÁRIO" "Cadastrar" msg widget
 
 postUsuarioR :: Handler Html
 postUsuarioR = do 

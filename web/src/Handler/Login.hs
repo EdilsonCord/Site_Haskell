@@ -20,7 +20,39 @@ getEntrarR = do
     (widget,_) <- generateFormPost formLogin
     msg <- getMessage
     defaultLayout $ do 
-        geraForm EntrarR "ENTRARR" "Login" msg widget
+        toWidgetHead $(luciusFile  "templates/homepage.lucius") 
+        addStylesheet (StaticR css_bootstrap_css)
+        sess <- lookupSession "_EMAIL"
+        [whamlet|
+            <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+            <a href=@{HomeR}>
+                <h1>
+                    ALUGUEL DE IMÓVEIS
+            <ul>
+                <li> 
+                    <a href=@{ImovelR}>
+                        CADASTRO DE IMOVEL
+
+                <li>
+                    <a href=@{ListImovR}>
+                        LISTAR
+            
+                $maybe email <- sess
+                    <li>
+                        <div>
+                            #{email}
+                            <form method=post action=@{SairR}>
+                                <input type="submit" value="Sair">
+                $nothing
+                    <li>
+                        <a href=@{EntrarR}>
+                            LOGIN
+
+                    <li> 
+                        <a href=@{UsuarioR}>
+                            CADASTRO DE USUÁRIO
+        |]
+        geraForm EntrarR "INFORME SUAS CREDENCIAIS" "Login" msg widget
 
 postEntrarR :: Handler Html
 postEntrarR = do 
@@ -36,7 +68,7 @@ postEntrarR = do
                 Nothing -> do 
                     setMessage [shamlet|
                         <div>
-                            E-mail N ENCONTRADO!
+                            E-mail ainda não foi cadastrado!
                     |]
                     redirect EntrarR
                 Just (Entity _ usu) -> do 
@@ -46,7 +78,7 @@ postEntrarR = do
                     else do 
                         setMessage [shamlet|
                             <div>
-                                Senha INCORRETA!
+                                Senha incorreta. Favor tentar novamente!
                         |]
                         redirect EntrarR 
         _ -> redirect HomeR

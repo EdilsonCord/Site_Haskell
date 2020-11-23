@@ -8,9 +8,14 @@ h1, h2, h3, h4, h5, h6, ul, li, a {
  text-transform: uppercase;
 }
 
+h5 {
+    color: #FFF;
+}
+
 h1{
     text-align: center;
     padding: 10px;
+    color: #000;
 }
 
 ul {
@@ -20,6 +25,28 @@ ul {
   overflow: hidden;
   background-color: #333333;
   text-align: center;
+}
+
+img {
+  height: 80vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  -webkit-filter: drop-shadow(2px 0px 5px #222);
+  filter: drop-shadow(2px 0px 5px #222);
+}
+
+label, input {
+    margin: 5px;
+}
+
+.formDiv, .formDivCadastro{
+    margin: 100px;
+}
+
+a, a:hover { 
+    text-decoration: none; 
 }
 
 li {
@@ -39,12 +66,6 @@ li a:hover {
   background-color: #111111;
 }
 
-img {
-  height: 80vh;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  -webkit-filter: drop-shadow(2px 0px 5px #222);
-  filter: drop-shadow(2px 0px 5px #222);
+.formDivCadastro label{
+    width: 100px;
 }
