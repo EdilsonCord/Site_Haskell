@@ -53,5 +53,6 @@ getHomeR = defaultLayout $ do
                 <li> 
                     <a href=@{UsuarioR}>
                         CADASTRO DE USUÁRIO
-            <img src="https://i.imgur.com/zOQImYb.png" title="walking" />        
+
+        <img src="https://i.imgur.com/zOQImYb.png" title="walking" />        
     |]            

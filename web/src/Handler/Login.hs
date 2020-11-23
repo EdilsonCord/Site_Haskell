@@ -71,7 +71,7 @@ postEntrarR = do
     case result of 
         FormSuccess ("admin@admin.com","root") -> do
             setSession "_EMAIL" "admin@admin.com"
-            redirect AdminR
+            redirect HomeR
         FormSuccess (email,senha) -> do 
            -- select * from usuario where email=digitado.email
            usuario <- runDB $ getBy (UniqueEmail email)
@@ -101,7 +101,50 @@ postSairR = do
 
 getAdminR :: Handler Html
 getAdminR = defaultLayout $ do
-    [whamlet|
-            <h1>
-                BEM-VINDO ADMIN
-    |]
+        toWidgetHead $(luciusFile  "templates/homepage.lucius") 
+        addStylesheet (StaticR css_bootstrap_css)
+        sess <- lookupSession "_EMAIL"
+        [whamlet|
+            <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+            
+            <a href=@{HomeR}>
+                <h1>
+                    ALUGUEL DE IMÓVEIS
+            <ul>
+                <li> 
+                    <a href=@{ImovelR}>
+                        CADASTRO DE IMÓVEL
+
+                <li>
+                    <a href=@{ListImovR}>
+                        LISTA DE IMÓVEIS
+            
+                $maybe email <- sess
+
+                    <li>
+                        <a href=@{ListCompraR}>
+                            LISTA DE ALUGUÉIS
+
+                    <li>
+                        <a>
+                            Logado como: #{email}
+
+                    <li>
+                        <div>
+                            
+                            <form method=post action=@{SairR}>
+                                <input type="submit" value="SAIR">
+                $nothing
+                    <li>
+                        <a href=@{EntrarR}>
+                            LOGIN
+
+                    <li> 
+                        <a href=@{UsuarioR}>
+                            CADASTRO DE USUÁRIO
+                
+        |]
+        [whamlet|
+                <h3>
+                    VOCÊ ESTÁ LOGADO COMO ADMIN
+        |]
