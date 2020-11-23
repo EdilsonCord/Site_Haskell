@@ -40,7 +40,7 @@ getEntrarR = do
                 $maybe email <- sess
                     <li>
                         <div>
-                            #{email}
+                            
                             <form method=post action=@{SairR}>
                                 <input type="submit" value="Sair">
                 $nothing

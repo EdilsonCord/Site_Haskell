@@ -83,3 +83,18 @@ td, th {
 table {
     font-size: 2rem;
 }
+
+.formDiv li {
+    display: flex;
+    margin: 20px;
+    font-size: 2rem;
+
+}
+
+.formDiv ul {
+    background-color: #FFF;
+}
+
+li.itemPrincipal {
+    font-size: 3rem;
+}

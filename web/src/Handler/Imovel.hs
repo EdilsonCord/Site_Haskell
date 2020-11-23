@@ -55,7 +55,7 @@ auxImovelR rt imovel = do
 
                     <li>
                         <div>
-                            #{email}
+                            
                             <form method=post action=@{SairR}>
                                 <input type="submit" value="SAIR">
                 $nothing
@@ -121,7 +121,7 @@ getDescR pid = do
 
                     <li>
                         <div>
-                            #{email}
+                            
                             <form method=post action=@{SairR}>
                                 <input type="submit" value="SAIR">
                 $nothing
@@ -135,21 +135,22 @@ getDescR pid = do
                 
         |]
         [whamlet|
-            <h1>
-                Nome: #{imovelNome imovel}
-            
-            <h2>
-                Descricao: #{imovelDescricao imovel}
-            
-            <h3>
-                Endereco: #{imovelEndereco imovel}
-            
-            <h4>
-                Preco: #{imovelPreco imovel}
-            
-            <form action=@{ComprarR pid} method=post>
-                ^{widget}
-                <input type="submit" value="Comprar">
+            <div class="formDiv">
+                <h3>
+                    #{imovelNome imovel}
+                
+                <h4>
+                    Descricao: #{imovelDescricao imovel}
+                
+                <h4>
+                    Endereco: #{imovelEndereco imovel}
+                
+                <h4>
+                    Preco: #{imovelPreco imovel}
+                
+                <form action=@{ComprarR pid} method=post>
+                    ^{widget}
+                    <input type="submit" value="Alugar">
         |]
 
 getListImovR :: Handler Html
@@ -182,7 +183,7 @@ getListImovR = do
 
                     <li>
                         <div>
-                            #{email}
+                           
                             <form method=post action=@{SairR}>
                                 <input type="submit" value="SAIR">
                 $nothing
