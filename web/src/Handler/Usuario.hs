@@ -28,24 +28,33 @@ getUsuarioR = do
         sess <- lookupSession "_EMAIL"
         [whamlet|
             <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+            
             <a href=@{HomeR}>
                 <h1>
                     ALUGUEL DE IMÓVEIS
             <ul>
                 <li> 
                     <a href=@{ImovelR}>
-                        CADASTRO DE IMOVEL
+                        CADASTRO DE IMÓVEL
 
                 <li>
                     <a href=@{ListImovR}>
-                        LISTAR
+                        LISTA DE IMÓVEIS
             
                 $maybe email <- sess
+                    <li>
+                        <a href=@{ListCompraR}>
+                            LISTA DE ALUGUÉIS
+
+                    <li>
+                        <a>
+                            Logado como: #{email}
+
                     <li>
                         <div>
                             
                             <form method=post action=@{SairR}>
-                                <input type="submit" value="Sair">
+                                <input type="submit" value="SAIR">
                 $nothing
                     <li>
                         <a href=@{EntrarR}>
@@ -54,6 +63,7 @@ getUsuarioR = do
                     <li> 
                         <a href=@{UsuarioR}>
                             CADASTRO DE USUÁRIO
+                
         |]
         geraForm UsuarioR "CADASTRO DE USUÁRIO" "Cadastrar" msg widget
 

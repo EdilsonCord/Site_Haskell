@@ -39,13 +39,18 @@ getListCompraR = do
                             <ul>
                                 <li> 
                                     <a href=@{ImovelR}>
-                                        CADASTRO DE IMOVEL
+                                        CADASTRO DE IMÓVEL
 
                                 <li>
                                     <a href=@{ListImovR}>
-                                        LISTAR
+                                        LISTA DE IMÓVEIS
                             
                                 $maybe email <- sess
+
+                                    <li>
+                                        <a href=@{ListCompraR}>
+                                            LISTA DE ALUGUÉIS
+
                                     <li>
                                         <a>
                                             Logado como: #{email}

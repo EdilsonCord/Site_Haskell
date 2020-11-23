@@ -42,13 +42,18 @@ auxImovelR rt imovel = do
             <ul>
                 <li> 
                     <a href=@{ImovelR}>
-                        CADASTRO DE IMOVEL
+                        CADASTRO DE IMÓVEL
 
                 <li>
                     <a href=@{ListImovR}>
-                        LISTAR
+                        LISTA DE IMÓVEIS
             
                 $maybe email <- sess
+
+                    <li>
+                        <a href=@{ListCompraR}>
+                            LISTA DE ALUGUÉIS
+
                     <li>
                         <a>
                             Logado como: #{email}
@@ -108,13 +113,18 @@ getDescR pid = do
             <ul>
                 <li> 
                     <a href=@{ImovelR}>
-                        CADASTRO DE IMOVEL
+                        CADASTRO DE IMÓVEL
 
                 <li>
                     <a href=@{ListImovR}>
-                        LISTAR
+                        LISTA DE IMÓVEIS
             
                 $maybe email <- sess
+
+                    <li>
+                        <a href=@{ListCompraR}>
+                            LISTA DE ALUGUÉIS
+
                     <li>
                         <a>
                             Logado como: #{email}
@@ -170,20 +180,25 @@ getListImovR = do
             <ul>
                 <li> 
                     <a href=@{ImovelR}>
-                        CADASTRO DE IMOVEL
+                        CADASTRO DE IMÓVEL
 
                 <li>
                     <a href=@{ListImovR}>
-                        LISTAR
+                        LISTA DE IMÓVEIS
             
                 $maybe email <- sess
+
+                    <li>
+                        <a href=@{ListCompraR}>
+                            LISTA DE ALUGUÉIS
+
                     <li>
                         <a>
                             Logado como: #{email}
 
                     <li>
                         <div>
-                           
+                            
                             <form method=post action=@{SairR}>
                                 <input type="submit" value="SAIR">
                 $nothing

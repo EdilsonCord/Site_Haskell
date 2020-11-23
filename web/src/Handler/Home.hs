@@ -25,19 +25,24 @@ getHomeR = defaultLayout $ do
         <ul>
             <li> 
                 <a href=@{ImovelR}>
-                    CADASTRO DE IMOVEL
+                    CADASTRO DE IMÓVEL
 
             <li>
                 <a href=@{ListImovR}>
-                    LISTAR
+                    LISTA DE IMÓVEIS
         
             $maybe email <- sess
+                <li>
+                    <a href=@{ListCompraR}>
+                        LISTA DE ALUGUÉIS
+
                 <li>
                     <a>
                         Logado como: #{email}
 
                 <li>
                     <div>
+                        
                         <form method=post action=@{SairR}>
                             <input type="submit" value="SAIR">
             $nothing
@@ -48,6 +53,5 @@ getHomeR = defaultLayout $ do
                 <li> 
                     <a href=@{UsuarioR}>
                         CADASTRO DE USUÁRIO
-                
-        <img src="https://i.imgur.com/zOQImYb.png" title="walking" />
-    |]
+            <img src="https://i.imgur.com/zOQImYb.png" title="walking" />        
+    |]            
