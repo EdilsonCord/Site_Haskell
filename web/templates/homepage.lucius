@@ -69,3 +69,17 @@ li a:hover {
 .formDivCadastro label{
     width: 100px;
 }
+
+.divLista {
+    margin-left: 5vw;
+    padding-top: 50px;
+}
+
+td, th {
+    padding-bottom: 60px;
+    width: 30vw;
+}
+
+table {
+    font-size: 2rem;
+}

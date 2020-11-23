@@ -95,68 +95,147 @@ getDescR :: ImovelId -> Handler Html
 getDescR pid = do 
     imovel <- runDB $ get404 pid
     (widget,_) <- generateFormPost formQt
-    defaultLayout [whamlet|
-        <h1>
-            Nome: #{imovelNome imovel}
-        
-        <h2>
-            Descricao: #{imovelDescricao imovel}
-        
-        <h3>
-            Endereco: #{imovelEndereco imovel}
-        
-        <h4>
-            Preco: #{imovelPreco imovel}
-        
-        <form action=@{ComprarR pid} method=post>
-            ^{widget}
-            <input type="submit" value="Comprar">
-    |]
+    defaultLayout $ do
+        toWidgetHead $(luciusFile  "templates/homepage.lucius") 
+        addStylesheet (StaticR css_bootstrap_css)
+        sess <- lookupSession "_EMAIL"
+        [whamlet|
+            <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+            
+            <a href=@{HomeR}>
+                <h1>
+                    ALUGUEL DE IMÓVEIS
+            <ul>
+                <li> 
+                    <a href=@{ImovelR}>
+                        CADASTRO DE IMOVEL
+
+                <li>
+                    <a href=@{ListImovR}>
+                        LISTAR
+            
+                $maybe email <- sess
+                    <li>
+                        <a>
+                            Logado como: #{email}
+
+                    <li>
+                        <div>
+                            #{email}
+                            <form method=post action=@{SairR}>
+                                <input type="submit" value="SAIR">
+                $nothing
+                    <li>
+                        <a href=@{EntrarR}>
+                            LOGIN
+
+                    <li> 
+                        <a href=@{UsuarioR}>
+                            CADASTRO DE USUÁRIO
+                
+        |]
+        [whamlet|
+            <h1>
+                Nome: #{imovelNome imovel}
+            
+            <h2>
+                Descricao: #{imovelDescricao imovel}
+            
+            <h3>
+                Endereco: #{imovelEndereco imovel}
+            
+            <h4>
+                Preco: #{imovelPreco imovel}
+            
+            <form action=@{ComprarR pid} method=post>
+                ^{widget}
+                <input type="submit" value="Comprar">
+        |]
 
 getListImovR :: Handler Html
 getListImovR = do 
     -- imoveis :: [Entity Imovel]
     imoveis <- runDB $ selectList [] [Desc ImovelPreco]
-    defaultLayout [whamlet|
-            <table>
-                <thead>
-                    <tr>
-                        <th> 
-                            Nome do imovel
-                        
-                        <th>
-                            Descricao
-                        
-                        <th>
-                            Endereco
-                        
-                        <th>
-                            Preco: 
+    defaultLayout $ do
+        toWidgetHead $(luciusFile  "templates/homepage.lucius") 
+        addStylesheet (StaticR css_bootstrap_css)
+        sess <- lookupSession "_EMAIL"
+        [whamlet|
+            <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+            
+            <a href=@{HomeR}>
+                <h1>
+                    ALUGUEL DE IMÓVEIS
+            <ul>
+                <li> 
+                    <a href=@{ImovelR}>
+                        CADASTRO DE IMOVEL
 
-                        <th>
-                <tbody>
-                    $forall Entity pid imov <- imoveis
+                <li>
+                    <a href=@{ListImovR}>
+                        LISTAR
+            
+                $maybe email <- sess
+                    <li>
+                        <a>
+                            Logado como: #{email}
+
+                    <li>
+                        <div>
+                            #{email}
+                            <form method=post action=@{SairR}>
+                                <input type="submit" value="SAIR">
+                $nothing
+                    <li>
+                        <a href=@{EntrarR}>
+                            LOGIN
+
+                    <li> 
+                        <a href=@{UsuarioR}>
+                            CADASTRO DE USUÁRIO
+                
+        |]
+        [whamlet|
+            <div class="divLista">
+                <table>
+                    <thead>
                         <tr>
-                            <td>
-                                <a href=@{DescR pid}>
-                                    #{imovelNome imov}
-                            
-                            <td>
-                                #{imovelDescricao imov}
-                            
-                            <td>
-                                #{imovelEndereco imov}
-                            
-                            <td>
-                                #{imovelPreco imov}
-                            
+                            <th> 
+                                Nome
                             
                             <th>
-                                <a href=@{UpdImovR pid}>
-                                    Editar
+                                Descrição
+                            
                             <th>
-                                <form action=@{DelImovR pid} method=post>
-                                    <input type="submit" value="X">
+                                Endereço
+                            
+                            <th>
+                                Preço: 
+
+                            <th>
+                    <tbody>
+                        $forall Entity pid imov <- imoveis
+                            <tr>
+                                <td>
+                                    <a href=@{DescR pid}>
+                                        #{imovelNome imov}
+                                
+                                <td>
+                                    #{imovelDescricao imov}
+                                
+                                <td>
+                                    #{imovelEndereco imov}
+                                
+                                <td>
+                                    #{imovelPreco imov}
+                                
+                                
+                                <th>
+                                    <a href=@{UpdImovR pid}>
+                                        Editar
+                                <th>
+                                    <form action=@{DelImovR pid} method=post>
+                                        <input type="submit" value="X">
     |]
 
 getUpdImovR :: ImovelId -> Handler Html
