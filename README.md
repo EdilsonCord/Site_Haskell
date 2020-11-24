@@ -16,5 +16,5 @@ E o usuário admin é capaz de realizar todas as ações com a adição de edita
 http://www.imobiliariahaskell.ml/
 
 # Contribuidores 
-*@pedpeluiz 
-*@juulamas
+* @pedpeluiz 
+* @juulamas
