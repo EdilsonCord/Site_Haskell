@@ -4,7 +4,7 @@ Projeto desenvolvido em Haskell, HTML e CSS para a matéria Tópicos Especiais e
 
 O sistema foi desenvolvido em plataforma web Yesod e faz o CRUD de uma imobiliaria que aluga imóveis para o fim de semana.
 
-#Funções do Usuário
+# Funções do Usuário
 
 O usuário não logado pode ver as casas/apartamento para aluguel, porém não pode aluga-los.
 
