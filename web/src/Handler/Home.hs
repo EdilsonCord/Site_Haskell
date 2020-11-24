@@ -33,7 +33,7 @@ getHomeR = defaultLayout $ do
         
             $maybe email <- sess
                 <li>
-                    <a href=@{ListCompraR}>
+                    <a href=@{ListAluguelR}>
                         LISTA DE ALUGUÉIS
 
                 <li>

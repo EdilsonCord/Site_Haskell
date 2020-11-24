@@ -4,15 +4,15 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE QuasiQuotes #-}
-module Handler.Compra where
+module Handler.Aluguel where
 
 import Import
 import Tool
 import Database.Persist.Sql
 import Text.Lucius
 
-getListCompraR :: Handler Html
-getListCompraR = do
+getListAluguelR :: Handler Html
+getListAluguelR = do
     sess <- lookupSession "_EMAIL"
     case sess of 
         Nothing -> redirect HomeR
@@ -22,10 +22,10 @@ getListCompraR = do
                  Nothing -> redirect HomeR 
                  Just (Entity uid usuario) -> do 
                      let sql = "SELECT ??,??,?? FROM usuario \
-                        \ INNER JOIN compra ON compra.usuarioid = usuario.id \
-                        \ INNER JOIN imovel ON compra.imovelid = imovel.id \
+                        \ INNER JOIN aluguel ON aluguel.usuarioid = usuario.id \
+                        \ INNER JOIN imovel ON aluguel.imovelid = imovel.id \
                         \ WHERE usuario.id = ?"
-                     imoveis <- runDB $ rawSql sql [toPersistValue uid] :: Handler [(Entity Usuario,Entity Compra,Entity Imovel)]
+                     imoveis <- runDB $ rawSql sql [toPersistValue uid] :: Handler [(Entity Usuario,Entity Aluguel,Entity Imovel)]
                      defaultLayout $ do
                         toWidgetHead $(luciusFile  "templates/homepage.lucius") 
                         addStylesheet (StaticR css_bootstrap_css)
@@ -48,7 +48,7 @@ getListCompraR = do
                                 $maybe email <- sess
 
                                     <li>
-                                        <a href=@{ListCompraR}>
+                                        <a href=@{ListAluguelR}>
                                             LISTA DE ALUGUÉIS
 
                                     <li>
@@ -77,21 +77,21 @@ getListCompraR = do
                                     Aluguéis de #{usuarioNome usuario}
                                 
                                 <ul>
-                                    $forall (Entity _ _, Entity _ compra, Entity _ imovel) <- imoveis
+                                    $forall (Entity _ _, Entity _ aluguel, Entity _ imovel) <- imoveis
                                         <li class="itemPrincipal">
                                             #{imovelNome imovel}
                                             <ul>
                                                 <li>
                                                     Preço da diária: #{imovelPreco imovel}
                                                 <li>
-                                                    Quant. de dias alugados: #{compraQtunit compra}                                                    
+                                                    Quant. de dias alugados: #{aluguelQtunit aluguel}                                                    
                                                 <li>
-                                                    Total do aluguel: #{imovelPreco imovel * (fromIntegral (compraQtunit compra))}
+                                                    Total do aluguel: #{imovelPreco imovel * (fromIntegral (aluguelQtunit aluguel))}
 
                         |]
 
-postComprarR :: ImovelId -> Handler Html
-postComprarR pid = do
+postAlugarR :: ImovelId -> Handler Html
+postAlugarR pid = do
     ((resp,_),_) <- runFormPost formQt
     case resp of 
          FormSuccess qt -> do 
@@ -103,6 +103,6 @@ postComprarR pid = do
                       case usuario of 
                            Nothing -> redirect HomeR 
                            Just (Entity uid _) -> do 
-                               runDB $ insert (Compra pid uid qt)
-                               redirect ListCompraR
+                               runDB $ insert (Aluguel pid uid qt)
+                               redirect ListAluguelR
          _ -> redirect HomeR

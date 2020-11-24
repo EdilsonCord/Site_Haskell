@@ -25,7 +25,7 @@ library
       Application
       Foundation
       Handler.Common
-      Handler.Compra
+      Handler.Aluguel
       Handler.Home
       Handler.Imovel
       Handler.Login

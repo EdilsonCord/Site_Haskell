@@ -51,7 +51,7 @@ auxImovelR rt imovel = do
                 $maybe email <- sess
 
                     <li>
-                        <a href=@{ListCompraR}>
+                        <a href=@{ListAluguelR}>
                             LISTA DE ALUGUÉIS
 
                     <li>
@@ -122,7 +122,7 @@ getDescR pid = do
                 $maybe email <- sess
 
                     <li>
-                        <a href=@{ListCompraR}>
+                        <a href=@{ListAluguelR}>
                             LISTA DE ALUGUÉIS
 
                     <li>
@@ -158,7 +158,7 @@ getDescR pid = do
                 <h4>
                     Preco: #{imovelPreco imovel}
                 
-                <form action=@{ComprarR pid} method=post>
+                <form action=@{AlugarR pid} method=post>
                     ^{widget}
                     <input type="submit" value="Alugar">
         |]
@@ -189,7 +189,7 @@ getListImovR = do
                 $maybe email <- sess
 
                     <li>
-                        <a href=@{ListCompraR}>
+                        <a href=@{ListAluguelR}>
                             LISTA DE ALUGUÉIS
 
                     <li>

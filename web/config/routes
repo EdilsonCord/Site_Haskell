@@ -17,6 +17,6 @@
 
 /admin                      AdminR     GET
 
-/comprar/lista                      ListCompraR GET
-/comprar/#ImovelId/efetuar         ComprarR    POST
+/aluguel/lista                      ListAluguelR GET
+/aluguel/#ImovelId/efetuar         AlugarR    POST
 

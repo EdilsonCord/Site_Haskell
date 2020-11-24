@@ -5,7 +5,7 @@ Imovel
     preco Double
     deriving Show
 
-Compra 
+Aluguel 
     imovelid ImovelId 
     usuarioid UsuarioId 
     qtunit    Int
