@@ -268,23 +268,34 @@ getListImovR = do
 
 getUpdImovR :: ImovelId -> Handler Html
 getUpdImovR pid = do 
-    sess <- lookupSession "_ID"
-    antigo <- runDB $ get404 pid
-    auxImovelR (UpdImovR pid) (Just antigo)    
+    id <- lookupSession "_ID"
+    case id of 
+        Nothing -> redirect HomeR
+        Just _ -> do
+            antigo <- runDB $ get404 pid
+            auxImovelR (UpdImovR pid) (Just antigo)    
     
 -- UPDATE imovel WHERE id = pid SET ...
 postUpdImovR :: ImovelId -> Handler Html
 postUpdImovR pid = do
-    ((resp,_),_) <- runFormPost (formImovel Nothing)
-    case resp of 
-        FormSuccess novo -> do
-            runDB $ replace pid novo
-            redirect (DescR pid)
-        _ -> redirect HomeR
+    id <- lookupSession "_ID"
+    case id of 
+        Nothing -> redirect HomeR
+        Just _ -> do 
+            ((resp,_),_) <- runFormPost (formImovel Nothing)
+            case resp of 
+                FormSuccess novo -> do
+                    runDB $ replace pid novo
+                    redirect (HomeR)
+                _ -> redirect HomeR
 
 postDelImovR :: ImovelId -> Handler Html
 postDelImovR pid = do 
-    _ <- runDB $ get404 pid 
-    runDB $ delete pid 
-    redirect ListImovR
+    id <- lookupSession "_ID"
+    case id of 
+        Nothing -> redirect HomeR
+        Just _ -> do 
+            _ <- runDB $ get404 pid 
+            runDB $ delete pid 
+            redirect ListImovR
 
