@@ -76,13 +76,13 @@ postUsuarioR = do
                 runDB $ insert400 usuario 
                 setMessage [shamlet|
                     <div>
-                        USUARIO INCLUIDO
+                        USUÁRIO INCLUIDO
                 |]
                 redirect UsuarioR
             else do 
                 setMessage [shamlet|
                     <div>
-                        SENHA E VERIFICACAO N CONFEREM
+                        SENHAS NÃO CONFEREM 
                 |]
                 redirect UsuarioR
         _ -> redirect HomeR

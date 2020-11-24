@@ -17,6 +17,8 @@
 
 /admin                      AdminR     GET
 
+
+
 /aluguel/lista                      ListAluguelR GET
 /aluguel/#ImovelId/efetuar         AlugarR    POST
 

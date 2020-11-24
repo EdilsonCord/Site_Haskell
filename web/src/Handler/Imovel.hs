@@ -264,10 +264,10 @@ postUpdImovR :: ImovelId -> Handler Html
 postUpdImovR pid = do
     ((resp,_),_) <- runFormPost (formImovel Nothing)
     case resp of 
-         FormSuccess novo -> do
+        FormSuccess novo -> do
             runDB $ replace pid novo
-            redirect (DescR pid) 
-         _ -> redirect HomeR
+            redirect (DescR pid)
+        _ -> redirect HomeR
 
 postDelImovR :: ImovelId -> Handler Html
 postDelImovR pid = do 
@@ -275,4 +275,3 @@ postDelImovR pid = do
     runDB $ delete pid 
     redirect ListImovR
 
-    
