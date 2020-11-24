@@ -26,6 +26,7 @@ getUsuarioR = do
         toWidgetHead $(luciusFile  "templates/homepage.lucius") 
         addStylesheet (StaticR css_bootstrap_css)
         sess <- lookupSession "_EMAIL"
+        id <- lookupSession "_ID"
         [whamlet|
             <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
             

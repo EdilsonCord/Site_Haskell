@@ -92,7 +92,7 @@ postImovelR = do
     case resp of 
          FormSuccess imovel -> do 
              pid <- runDB $ insert imovel
-             redirect (DescR pid)
+             redirect (HomeR)
          _ -> redirect HomeR
     
 -- SELECT * from imovel where id = pid 
@@ -104,6 +104,7 @@ getDescR pid = do
         toWidgetHead $(luciusFile  "templates/homepage.lucius") 
         addStylesheet (StaticR css_bootstrap_css)
         sess <- lookupSession "_EMAIL"
+        id <- lookupSession "_ID"
         [whamlet|
             <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
             
@@ -171,6 +172,7 @@ getListImovR = do
         toWidgetHead $(luciusFile  "templates/homepage.lucius") 
         addStylesheet (StaticR css_bootstrap_css)
         sess <- lookupSession "_EMAIL"
+        id <- lookupSession "_ID"
         [whamlet|
             <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
             
@@ -211,6 +213,7 @@ getListImovR = do
                             CADASTRO DE USUÁRIO
                 
         |]
+
         [whamlet|
             <div class="divLista">
                 <table>
@@ -245,17 +248,27 @@ getListImovR = do
                                 <td>
                                     #{imovelPreco imov}
                                 
-                                
-                                <th>
-                                    <a href=@{UpdImovR pid}>
-                                        Editar
-                                <th>
-                                    <form action=@{DelImovR pid} method=post>
-                                        <input type="submit" value="X">
+                                $if null id
+                                    <th>
+                                        <a href=@{DescR pid} method=get>
+                                            <input type="submit" value="Visualizar">
+                                    <th>
+                                        <a href=@{HomeR} method=get>
+                                            <input type="submit" value="Voltar">
+                                $else    
+                                    <th>
+                                        <a href=@{UpdImovR pid}>
+                                            <input type="submit" value="Editar">
+                                    <th>
+                                        <form action=@{DelImovR pid} method=post>
+                                            <input type="submit" value="X">
+                            
+                            
     |]
 
 getUpdImovR :: ImovelId -> Handler Html
 getUpdImovR pid = do 
+    sess <- lookupSession "_ID"
     antigo <- runDB $ get404 pid
     auxImovelR (UpdImovR pid) (Just antigo)    
     

@@ -69,8 +69,9 @@ postEntrarR :: Handler Html
 postEntrarR = do 
     ((result,_),_) <- runFormPost formLogin
     case result of 
-        FormSuccess ("admin@admin.com","root") -> do
+        FormSuccess ("admin@admin.com","admin") -> do
             setSession "_EMAIL" "admin@admin.com"
+            setSession "_ID" "admin"
             redirect HomeR
         FormSuccess (email,senha) -> do 
            -- select * from usuario where email=digitado.email
@@ -92,11 +93,14 @@ postEntrarR = do
                                 Senha incorreta. Favor tentar novamente!
                         |]
                         redirect EntrarR 
-        _ -> redirect HomeR
+        _ -> do
+            redirect HomeR
+
         
 postSairR :: Handler Html 
 postSairR = do 
     deleteSession "_EMAIL"
+    deleteSession "_ID"
     redirect HomeR
 
 getAdminR :: Handler Html
